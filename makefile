@@ -7,6 +7,7 @@ GLOBAL_PREFIX=$(shell cat ${CURDIR}/${VARS_ENV} | grep -Po "(?<=GLOBAL_PREFIX=).
 FINALLY_EXPOSED_PORT=$(shell cat ${CURDIR}/${VARS_ENV} | grep -Po "(?<=FINALLY_EXPOSED_PORT=)[.:0-9]+")
 RESTART_POLICY=$(shell cat ${CURDIR}/${VARS_ENV} | grep -Po "(?<=RESTART_POLICY=).*")
 INSTALL_LDAP_REQUIREMENTS=$(shell cat ${CURDIR}/${VARS_ENV} | grep -Po "(?<=^INSTALL_LDAP_REQUIREMENTS=).*")
+INSTALL_MEMCACHED=$(shell cat ${CURDIR}/${VARS_ENV} | grep -Po "(?<=^INSTALL_MEMCACHED=).*")
 DOCKER_IN_GROUPS=$(shell groups | grep "docker")
 MYID=$(shell id -u)
 
@@ -54,6 +55,7 @@ preparations:
 	cat rdmo/dockerfile_master \
     	| sed 's|<UID>|$(MYID)|g' \
     	| sed 's|<INSTALL_LDAP_REQUIREMENTS>|${INSTALL_LDAP_REQUIREMENTS}|g' \
+    	| sed 's|<INSTALL_MEMCACHED>|${INSTALL_MEMCACHED}|g' \
     	> rdmo/dockerfile
 
 run_pull:
