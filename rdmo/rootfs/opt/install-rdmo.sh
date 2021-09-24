@@ -20,6 +20,10 @@ cp -f /conf/template_local.py ${RDMO_APP}/config/settings/local.py
 
 pip install -r ${RDMO_APP}/requirements/gunicorn.txt
 
+if [ "$INSTALL_LDAP_REQUIREMENTS" = true ]; then
+    pip install -r ${RDMO_APP}/requirements/ldap.txt
+fi
+
 cd ${RDMO_APP}
 python manage.py migrate
 python manage.py download_vendor_files

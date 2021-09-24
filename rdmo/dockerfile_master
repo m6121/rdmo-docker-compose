@@ -5,6 +5,8 @@ ENV USER=rdmo
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+ENV INSTALL_LDAP_REQUIREMENTS=<INSTALL_LDAP_REQUIREMENTS>
+
 ENV PATH=/opt:${PATH}
 
 ENV LANG C.UTF-8
@@ -49,6 +51,10 @@ RUN apt update && apt install -y \
         pandoc \
         texlive-xetex \
     && rm -rf /var/lib/apt/lists/*
+
+# for ldap
+RUN if [ "$INSTALL_LDAP_REQUIREMENTS" = true ]; then apt update && apt install -y \
+        libsasl2-dev libldap2-dev libssl-dev && rm -rf /var/lib/apt/lists/* ; fi
 
 COPY ./rootfs /
 RUN chmod -R 777 /tmp
