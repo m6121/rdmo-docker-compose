@@ -24,10 +24,6 @@ if [ "$INSTALL_LDAP_REQUIREMENTS" = true ]; then
     pip install -r ${RDMO_APP}/requirements/ldap.txt
 fi
 
-if [ "$INSTALL_MEMCACHED" = true ]; then
-    pip install -r ${RDMO_APP}/requirements/memcached.txt
-fi
-
 cd ${RDMO_APP}
 python manage.py migrate
 python manage.py download_vendor_files

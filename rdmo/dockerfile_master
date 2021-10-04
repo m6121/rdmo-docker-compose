@@ -57,10 +57,6 @@ RUN apt update && apt install -y \
 RUN if [ "$INSTALL_LDAP_REQUIREMENTS" = true ]; then apt update && apt install -y \
         libsasl2-dev libldap2-dev libssl-dev && rm -rf /var/lib/apt/lists/* ; fi
 
-# for memcached
-RUN if [ "$INSTALL_MEMCACHED" = true ]; then apt update && apt install -y \
-        memcached && rm -rf /var/lib/apt/lists/* ; fi
-
 COPY ./rootfs /
 RUN chmod -R 777 /tmp
 
