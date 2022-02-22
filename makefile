@@ -49,12 +49,12 @@ preparations:
 
 	cat nginx/dockerfile_master \
 		| sed 's|<UID>|$(MYID)|g' \
-		> nginx/dockerfile
+		> nginx/Dockerfile
 
 	cat rdmo/dockerfile_master \
     	| sed 's|<UID>|$(MYID)|g' \
     	| sed 's|<INSTALL_LDAP_REQUIREMENTS>|${INSTALL_LDAP_REQUIREMENTS}|g' \
-    	> rdmo/dockerfile
+    	> rdmo/Dockerfile
 
 run_pull:
 	$(DC_CMD) pull
